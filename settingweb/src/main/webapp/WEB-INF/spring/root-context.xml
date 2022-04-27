@@ -14,7 +14,7 @@
         <property name="url"
             value="jdbc:log4jdbc:mariadb://127.0.0.1:3306/theater" />
         <property name="username" value="root" />
-        <property name="password" value="******" />
+        <property name="password" value="960226" />
     </bean>
  
  
@@ -38,7 +38,7 @@
         base-package="com.devfun.dao"></context:component-scan>
     <context:component-scan
         base-package="com.devfun.service"></context:component-scan>
-    <context:component-scan
-        base-package="com.devfun.*"></context:component-scan>
+    <!--  <context:component-scan
+        base-package="com.devfun.*"></context:component-scan> -->
 	
 </beans>
