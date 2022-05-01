@@ -32,4 +32,24 @@ public class StatisticServiceImpl implements StatisticService {
 		return retVal;
 	}
 
+	/* 1. 월별 전체 전속자수 */
+	@Override
+	public HashMap<String, Object> monthAeccessNum(String month) {
+		// TODO Auto-generated method stub
+		HashMap<String, Object> retVal = new HashMap<String,Object>();
+		
+		try {
+			retVal = mapper.selectMonthAccess(month);
+			retVal.put("month", month);
+			retVal.put("is_success", true);
+			
+		} catch(Exception e) {
+			retVal.put("totCnt", -999);
+			retVal.put("year", month);
+			retVal.put("is_success", false);
+		}
+		
+		return retVal;
+	}
+
 }

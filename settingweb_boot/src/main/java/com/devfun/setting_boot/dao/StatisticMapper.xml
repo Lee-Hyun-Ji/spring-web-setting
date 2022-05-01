@@ -5,11 +5,18 @@
     
 <mapper namespace="com.devfun.setting_boot.dao.StatisticMapper">
  
- 	<!-- 1. 해당 년도의 로그인수 -->
+ 	<!-- (테스트) 해당 년도의 로그인수 -->
     <select id="selectYearLogin" parameterType="string" resultType="hashMap">
         select count(*) as totCnt
         from statistic.requestinfo info
         where left(info.createDate, 2) = #{year};
+    </select>
+    
+    <!-- 1. 월별 전체 접속자수 -->
+    <select id="selectMonthAccess" parameterType="string" resultType="hashMap">
+    	SELECT count(*) AS totCnt
+		FROM statistic.requestinfo AS info
+		WHERE left(info.createDate, 4) = #{month};
     </select>
     
 </mapper>
