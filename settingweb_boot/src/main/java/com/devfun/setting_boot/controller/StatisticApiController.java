@@ -32,4 +32,10 @@ public class StatisticApiController {
     	return service.dayAccessNum(date);
     }
     
+    @RequestMapping("/api/v1/login-cnt/dept/month")
+    public Map<String,Object> statistic_api_3(String dept, String month){
+    	
+    	return service.monthLoginNumByDept(dept, month);
+    }
+    
 }

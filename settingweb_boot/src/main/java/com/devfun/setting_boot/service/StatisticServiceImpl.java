@@ -69,4 +69,25 @@ public class StatisticServiceImpl implements StatisticService {
 		return retVal;
 	}
 
+	/* 3. 부서별 월별 로그인수 */
+	@Override
+	public HashMap<String, Object> monthLoginNumByDept(String dept, String month) {
+		HashMap<String,Object> retVal = new HashMap<String, Object>();
+		
+		try {
+			retVal = mapper.selectMonthLoginByDept(dept, month);
+			retVal.put("department", dept);
+			retVal.put("requestMonth", month);
+			retVal.put("is_success", true);
+		
+		} catch(Exception e) {
+			retVal.put("logCnt", -999);
+			retVal.put("department", dept);
+			retVal.put("requestMonth", month);
+			retVal.put("is_success", false);
+		}
+		
+		return retVal;
+	}
+
 }

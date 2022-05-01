@@ -12,4 +12,6 @@ public interface StatisticMapper {
 	public HashMap<String, Object> selectMonthAccess(String month);
 	/* 2. 일별 전체 접속자수 */
 	public HashMap<String, Object> selectDayAccess(String date);
+	/* 3. 부서별 월별 로그인수 */
+	public HashMap<String, Object> selectMonthLoginByDept(String dept, String month);
 }

@@ -25,5 +25,14 @@
 		FROM statistic.requestinfo AS info
 		WHERE left(info.createDate, 6) = #{date};
 	</select>
+	
+	<!-- 3. 부서별 월별 로그인수 -->
+	<select id="selectMonthLoginByDept" parameterType="string" resultType="hashMap">
+		SELECT count(*) AS logCnt
+		FROM statistic.requestinfo AS info LEFT OUTER JOIN statistic.user user
+		ON info.userID = user.userID
+		WHERE info.requestCode = 'L' AND user.HR_ORGAN = #{dept}  AND left(info.createDate,4) = #{month};
+	</select>
+	
 	    
 </mapper>
