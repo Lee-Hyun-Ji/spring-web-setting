@@ -38,4 +38,10 @@ public class StatisticApiController {
     	return service.monthLoginNumByDept(dept, month);
     }
     
+    @RequestMapping("/api/v1/login-cnt/day/average")
+    public Map<String,Object> statistic_api_4(String start, String end){
+    	
+    	return service.dayLoginAverage(start, end);
+    }
+    
 }
