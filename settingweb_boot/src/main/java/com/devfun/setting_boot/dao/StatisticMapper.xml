@@ -19,4 +19,11 @@
 		WHERE left(info.createDate, 4) = #{month};
     </select>
     
+    <!-- 2. 일별 전체 접속자수 -->
+	<select id="selectDayAccess" parameterType="string" resultType="hashMap">
+		SELECT count(*) AS totCnt
+		FROM statistic.requestinfo AS info
+		WHERE left(info.createDate, 6) = #{date};
+	</select>
+	    
 </mapper>

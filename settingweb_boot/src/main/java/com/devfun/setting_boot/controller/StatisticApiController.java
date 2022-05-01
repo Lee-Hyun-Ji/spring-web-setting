@@ -20,10 +20,16 @@ public class StatisticApiController {
         return "Test Success";
     }
     
-    @RequestMapping("/api/v1/access-cnt")
-    public Map<String, Object> api_1(String month){
+    @RequestMapping("/api/v1/access-cnt/month")
+    public Map<String, Object> statistic_api_1(String month){
     	
     	return service.monthAeccessNum(month);
+    }
+    
+    @RequestMapping("/api/v1/access-cnt/day")
+    public Map<String,Object> statistic_api_2(String date){
+    	
+    	return service.dayAccessNum(date);
     }
     
 }
