@@ -44,4 +44,10 @@ public class StatisticApiController {
     	return service.dayLoginAverage(start, end);
     }
     
+    /* DB로부터 데이터를 받아오는 것까지 구현(공공API로 공휴일 제외 구현 예정)*/
+    @RequestMapping("/api/v1/login-cnt/month/except-holidays")
+    public Map<String,Object> statistic_api_5(String month){
+    	
+    	return service.monthLoginNumExceptHoliday(month);
+    }
 }

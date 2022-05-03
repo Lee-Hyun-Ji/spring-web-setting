@@ -1,6 +1,9 @@
 package com.devfun.setting_boot.dao;
 
 import java.util.HashMap;
+import java.util.List;
+
+import com.devfun.setting_boot.dto.LoginDateListDto;
 
 //import com.devfun.setting_boot.dto.StatisticDto;
 
@@ -16,4 +19,6 @@ public interface StatisticMapper {
 	public HashMap<String, Object> selectMonthLoginByDept(String dept, String month);
 	/* 4. 평균 하루 로그인수 */
 	public HashMap<String, Object> selectDayAverage(String startDate, String endDate);
+	/* 5. 휴일을 제외한 로그인수 */
+	public List<LoginDateListDto> selectMonthLogin(String month);
 }
