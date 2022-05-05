@@ -19,6 +19,8 @@ public interface StatisticMapper {
 	public HashMap<String, Object> selectMonthLoginByDept(String dept, String month);
 	/* 4. 평균 하루 로그인수 */
 	public HashMap<String, Object> selectDayAverage(String startDate, String endDate);
-	/* 5. 휴일을 제외한 로그인수 */
+	/* 5-1. 주말을 제외한 날짜,로그인수 */
 	public List<LoginDateListDto> selectMonthLogin(String month);
+	/* 5-2. 월별 공휴일 날짜 */
+	public List<String> selectHoliday(String year, String month);
 }

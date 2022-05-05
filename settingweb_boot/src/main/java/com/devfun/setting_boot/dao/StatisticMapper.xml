@@ -45,13 +45,20 @@
 		) AS sub;
 	</select>
 	
-	<!-- 5. 휴일을 제외한 로그인수 -->
-	<select id="selectMonthLogin" parameterType="string" resultType="com.devfun.setting_boot.dto.LoginDateListDto">
+	<!-- 5-1. 주말을 제외한 날짜,로그인수 -->
+	<select id="selectMonthLogin" parameterType="string" resultType="com.devfun.setting_boot.dto.LoginDateListDto"> <!-- com.devfun.setting_boot.dto.LoginDateListDto -->
 		SELECT substr(info.createDate,5,2) AS logDate, count(left(info.createDate, 6)) AS logCnt
 		FROM statistic.requestinfo info
 		WHERE info.requestCode = 'L' AND left(info.createDate, 4) = #{month} AND dayofweek(left(info.createDate, 6)) between 2 and 6
 		GROUP BY logDate
 		ORDER BY logDate;
+	</select>
+	
+	<!-- 5-2. 월별 공휴일 날짜 -->
+	<select id="selectHoliday" parameterType="string" resultType="string">
+		SELECT day(h.date) AS dayOfHoliday
+		FROM statistic.holidays h
+		WHERE right(year(h.date),2)=#{year} AND month(h.date)=#{month};
 	</select>
 	    
 </mapper>
