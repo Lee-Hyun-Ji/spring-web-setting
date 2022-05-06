@@ -1,4 +1,4 @@
-package com.devfun.setting_web.exception;
+package com.devfun.setting_boot.exception;
 
 public class DateFormatException extends Exception{
 	public DateFormatException(String date) {

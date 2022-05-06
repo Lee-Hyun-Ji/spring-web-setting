@@ -8,7 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 import com.devfun.setting_boot.dao.StatisticMapper;
 import com.devfun.setting_boot.dto.LoginDateListDto;
-import com.devfun.setting_web.exception.DateFormatException;
+import com.devfun.setting_boot.exception.DateFormatException;
 
 @Service
 public class StatisticServiceImpl implements StatisticService {

@@ -2,7 +2,7 @@ package com.devfun.setting_boot.service;
 
 import java.util.HashMap;
 
-import com.devfun.setting_web.exception.DateFormatException;
+import com.devfun.setting_boot.exception.DateFormatException;
 
 public interface StatisticService {
 	public HashMap<String, Object> monthAeccessNum(String month) throws DateFormatException;
