@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 import com.devfun.setting_boot.dao.StatisticMapper;
 import com.devfun.setting_boot.dto.LoginDateListDto;
+import com.devfun.setting_web.exception.DateFormatException;
 
 @Service
 public class StatisticServiceImpl implements StatisticService {
@@ -35,8 +36,15 @@ public class StatisticServiceImpl implements StatisticService {
 
 	/* 1. 월별 전체 전속자수 */
 	@Override
-	public HashMap<String, Object> monthAeccessNum(String month) {
+	public HashMap<String, Object> monthAeccessNum(String month) throws DateFormatException {
 		HashMap<String, Object> retVal = new HashMap<String,Object>();
+		
+		if(month.length() != 4)
+			throw new DateFormatException(month);
+		for(int i = 0; i < 4; i++) {
+			if(!Character.isDigit(month.charAt(i)))
+				throw new DateFormatException(month);
+		}
 		
 		try {
 			retVal = mapper.selectMonthAccess(month);
@@ -54,8 +62,15 @@ public class StatisticServiceImpl implements StatisticService {
 	
 	/* 2. 일별 전체 접속자수 */
 	@Override
-	public HashMap<String, Object> dayAccessNum(String date) {
+	public HashMap<String, Object> dayAccessNum(String date) throws DateFormatException {
 		HashMap<String, Object> retVal = new HashMap<String, Object>();
+		
+		if(date.length() != 6)
+			throw new DateFormatException(date);
+		for(int i = 0; i < 6; i++) {
+			if(!Character.isDigit(date.charAt(i)))
+				throw new DateFormatException(date);
+		}
 		
 		try {
 			retVal = mapper.selectDayAccess(date);
@@ -73,18 +88,25 @@ public class StatisticServiceImpl implements StatisticService {
 
 	/* 3. 부서별 월별 로그인수 */
 	@Override
-	public HashMap<String, Object> monthLoginNumByDept(String dept, String month) {
+	public HashMap<String, Object> monthLoginNumByDept(String dept, String month) throws DateFormatException {
 		HashMap<String,Object> retVal = new HashMap<String, Object>();
+		
+		if(month.length() != 4)
+			throw new DateFormatException(month);
+		for(int i = 0; i < 4; i++) {
+			if(!Character.isDigit(month.charAt(i)))
+				throw new DateFormatException(month);
+		}
 		
 		try {
 			retVal = mapper.selectMonthLoginByDept(dept, month);
-			retVal.put("department", dept);
+			retVal.put("requestDept", dept);
 			retVal.put("requestMonth", month);
 			retVal.put("is_success", true);
 		
 		} catch(Exception e) {
 			retVal.put("logCnt", -999);
-			retVal.put("department", dept);
+			retVal.put("requestDept", dept);
 			retVal.put("requestMonth", month);
 			retVal.put("is_success", false);
 		}
@@ -94,8 +116,19 @@ public class StatisticServiceImpl implements StatisticService {
 
 	/* 4. 평균 하루 로그인수 */
 	@Override
-	public HashMap<String, Object> dayLoginAverage(String startDate, String endDate) {
+	public HashMap<String, Object> dayLoginAverage(String startDate, String endDate) throws DateFormatException {
 		HashMap<String,Object> retVal = new HashMap<String, Object>();
+		
+		if(startDate.length() != 6)
+			throw new DateFormatException(startDate);
+		else if(endDate.length() != 6)
+			throw new DateFormatException(endDate);
+		for(int i = 0; i < 6; i++) {
+			if(!Character.isDigit(startDate.charAt(i)))
+				throw new DateFormatException(startDate);
+			if(!Character.isDigit(endDate.charAt(i)))
+				throw new DateFormatException(endDate);
+		}
 		
 		try {
 			retVal = mapper.selectDayAverage(startDate, endDate);
@@ -115,8 +148,15 @@ public class StatisticServiceImpl implements StatisticService {
 
 	/* 5. 휴일을 제외한 로그인수 */
 	@Override
-	public HashMap<String, Object> monthLoginNumExceptHoliday(String month) {
+	public HashMap<String, Object> monthLoginNumExceptHoliday(String month) throws DateFormatException {
 		HashMap<String, Object> retVal = new HashMap<String, Object>();
+		
+		if(month.length() != 4)
+			throw new DateFormatException(month);
+		for(int i = 0; i < 4; i++) {
+			if(!Character.isDigit(month.charAt(i)))
+				throw new DateFormatException(month);
+		}
 		
 		try {
 			List<LoginDateListDto> weekdayLogins = mapper.selectMonthLogin(month);

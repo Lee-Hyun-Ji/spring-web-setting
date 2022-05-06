@@ -3,50 +3,49 @@ package com.devfun.setting_boot.controller;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.devfun.setting_boot.service.StatisticService;
+import com.devfun.setting_web.exception.DateFormatException;
+import com.devfun.setting_web.exception.ErrorMessage;
+
 
 @RestController
+@RequestMapping("statistic/v1")
 public class StatisticApiController {
 	
 	@Autowired
     private StatisticService service;
-    
-    @RequestMapping("/api/v1/test")
-    public String sqltest(String year) throws Exception{ 
-        
-        return "Test Success";
+	
+	@ExceptionHandler
+	 public ErrorMessage illegalExHandle(DateFormatException e) {
+        return new ErrorMessage("400", e.getMessage());
     }
     
-    @RequestMapping("/api/v1/access-cnt/month")
-    public Map<String, Object> statistic_api_1(String month){
-    	
+    @RequestMapping("/access-cnt/month")
+    public Map<String, Object> statistic_api_1(String month) throws DateFormatException{
     	return service.monthAeccessNum(month);
     }
     
-    @RequestMapping("/api/v1/access-cnt/day")
-    public Map<String,Object> statistic_api_2(String date){
-    	
+    @RequestMapping("/access-cnt/day")
+    public Map<String,Object> statistic_api_2(String date) throws DateFormatException{
     	return service.dayAccessNum(date);
     }
     
-    @RequestMapping("/api/v1/login-cnt/dept/month")
-    public Map<String,Object> statistic_api_3(String dept, String month){
-    	
+    @RequestMapping("/login-cnt/month/dept")
+    public Map<String,Object> statistic_api_3(String dept, String month) throws DateFormatException{
     	return service.monthLoginNumByDept(dept, month);
     }
     
-    @RequestMapping("/api/v1/login-cnt/day/average")
-    public Map<String,Object> statistic_api_4(String start, String end){
-    	
+    @RequestMapping("/login-cnt/day-average")
+    public Map<String,Object> statistic_api_4(String start, String end) throws DateFormatException{
     	return service.dayLoginAverage(start, end);
     }
     
-    @RequestMapping("/api/v1/login-cnt/month/except-holidays")
-    public Map<String,Object> statistic_api_5(String month){
-    	
+    @RequestMapping("/login-cnt/month/except-holidays")
+    public Map<String,Object> statistic_api_5(String month) throws DateFormatException{
     	return service.monthLoginNumExceptHoliday(month);
     }
 }
