@@ -1,6 +1,7 @@
 package com.devfun.setting_boot.dto;
 
 public class LoginDateListDto {
+	
 	private String logDate;
 	private int logCnt;
 	

@@ -15,30 +15,13 @@ public class StatisticServiceImpl implements StatisticService {
 
 	@Autowired
 	private StatisticMapper mapper;
-	
-	@Override
-	public HashMap<String, Object> yearLoginNum(String year) {
-		HashMap<String, Object> retVal = new HashMap<String,Object>();
-		
-		try {
-			retVal = mapper.selectYearLogin(year);
-			retVal.put("year", year);
-			retVal.put("is_success", true);
-			
-		} catch(Exception e) {
-			retVal.put("totCnt", -999);
-			retVal.put("year", year);
-			retVal.put("is_success", false);
-		}
-		
-		return retVal;
-	}
 
 	/* 1. 월별 전체 전속자수 */
 	@Override
 	public HashMap<String, Object> monthAeccessNum(String month) throws DateFormatException {
 		HashMap<String, Object> retVal = new HashMap<String,Object>();
 		
+		//request parameter 날짜 형식 유효성 검사
 		if(month.length() != 4)
 			throw new DateFormatException(month);
 		for(int i = 0; i < 4; i++) {
@@ -65,6 +48,7 @@ public class StatisticServiceImpl implements StatisticService {
 	public HashMap<String, Object> dayAccessNum(String date) throws DateFormatException {
 		HashMap<String, Object> retVal = new HashMap<String, Object>();
 		
+		//request parameter 날짜 형식 유효성 검사
 		if(date.length() != 6)
 			throw new DateFormatException(date);
 		for(int i = 0; i < 6; i++) {
@@ -91,6 +75,7 @@ public class StatisticServiceImpl implements StatisticService {
 	public HashMap<String, Object> monthLoginNumByDept(String dept, String month) throws DateFormatException {
 		HashMap<String,Object> retVal = new HashMap<String, Object>();
 		
+		//request parameter 날짜 형식 유효성 검사
 		if(month.length() != 4)
 			throw new DateFormatException(month);
 		for(int i = 0; i < 4; i++) {
@@ -100,13 +85,13 @@ public class StatisticServiceImpl implements StatisticService {
 		
 		try {
 			retVal = mapper.selectMonthLoginByDept(dept, month);
-			retVal.put("requestDept", dept);
+			retVal.put("requestDept", dept.toUpperCase());
 			retVal.put("requestMonth", month);
 			retVal.put("is_success", true);
 		
 		} catch(Exception e) {
 			retVal.put("logCnt", -999);
-			retVal.put("requestDept", dept);
+			retVal.put("requestDept", dept.toUpperCase());
 			retVal.put("requestMonth", month);
 			retVal.put("is_success", false);
 		}
@@ -119,6 +104,7 @@ public class StatisticServiceImpl implements StatisticService {
 	public HashMap<String, Object> dayLoginAverage(String startDate, String endDate) throws DateFormatException {
 		HashMap<String,Object> retVal = new HashMap<String, Object>();
 		
+		//request parameter 날짜 형식 유효성 검사
 		if(startDate.length() != 6)
 			throw new DateFormatException(startDate);
 		else if(endDate.length() != 6)
@@ -151,6 +137,7 @@ public class StatisticServiceImpl implements StatisticService {
 	public HashMap<String, Object> monthLoginNumExceptHoliday(String month) throws DateFormatException {
 		HashMap<String, Object> retVal = new HashMap<String, Object>();
 		
+		//request parameter 날짜 형식 유효성 검사
 		if(month.length() != 4)
 			throw new DateFormatException(month);
 		for(int i = 0; i < 4; i++) {
