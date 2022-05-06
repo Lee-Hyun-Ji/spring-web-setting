@@ -93,7 +93,6 @@ public class StatisticServiceImpl implements StatisticService {
 	}
 
 	/* 4. 평균 하루 로그인수 */
-	/* DB select문에서 NullPointerException에 대한 처리 필요 */
 	@Override
 	public HashMap<String, Object> dayLoginAverage(String startDate, String endDate) {
 		HashMap<String,Object> retVal = new HashMap<String, Object>();
